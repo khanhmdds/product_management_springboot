@@ -21,7 +21,7 @@ public class User {
     private String email;
 
     @NotEmpty
-    @Min(6)
+    @Min(8)
     private String password;
 
     @NotEmpty
