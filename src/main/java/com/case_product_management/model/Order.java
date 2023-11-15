@@ -13,7 +13,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long order_id;
 
-    @OneToMany(mappedBy = "orderDetails")
+    @OneToMany(mappedBy = "order")
     private List<OrderDetails> orderDetail;
 
     private String address;

@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> setRole = new HashSet<>();
 
-        setRole.add(roleRepository.findByRole("ROLE_MEMBER"));
+        setRole.add(roleRepository.findByRoleName("ROLE_MEMBER"));
         user.setRole(setRole);
         return userRepository.save(user);
     }
@@ -86,7 +86,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
 
         Set<Role> role  = new HashSet<>();
-        role.add(roleRepository.findByRole(dto.getRole()));
+        role.add(roleRepository.findByRoleName(dto.getRoleName()));
         user.setRole(role);
 
         return userRepository.save(user);

@@ -26,7 +26,7 @@ public class User {
 
     @NotEmpty
     @Transient
-    private String rePassword;
+    private String confirmPassword;
 
     @NotEmpty
     private String fullName;
@@ -49,11 +49,15 @@ public class User {
 
     public User() {
     }
-
-    public User(String email, String password, String rePassword, String fullName, String number, String address, Set<Role> roles, List<Order> listOrder) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.rePassword = rePassword;
+    }
+
+    public User(String email, String password, String confirmPassword, String fullName, String number, String address, Set<Role> roles, List<Order> listOrder) {
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
         this.fullName = fullName;
         this.number = number;
         this.address = address;
@@ -85,12 +89,12 @@ public class User {
         this.password = password;
     }
 
-    public String getRePassword() {
-        return rePassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFullName() {

@@ -1,7 +1,6 @@
 package com.case_product_management.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -11,20 +10,22 @@ public class Role {
     @GeneratedValue
     private long role_id;
 
-    private String role;
+    private String roleName;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> user;
+    @ManyToMany(mappedBy = "role")
+    private Set<User> user;
 
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
 
     public Role() {
     }
 
-    public Role(long role_id, String role, Set<User> user) {
-        this.role_id = role_id;
-        this.role = role;
-//        this.user = user;
-    }
 
     public long getId() {
         return role_id;
@@ -34,12 +35,12 @@ public class Role {
         this.role_id = role_id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String role) {
+        this.roleName = role;
     }
 
 //    public Set<User> getUser() {
@@ -49,4 +50,7 @@ public class Role {
 //    public void setUser(Set<User> user) {
 //        this.user = user;
 //    }
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 }

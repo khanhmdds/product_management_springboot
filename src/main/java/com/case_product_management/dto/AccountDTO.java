@@ -25,7 +25,7 @@ public class AccountDTO {
     @NotEmpty
     private String number;
 
-    private String role;
+    private String roleName;
 
     public String getId() {
         return id;
@@ -83,11 +83,11 @@ public class AccountDTO {
         this.number = number;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }
