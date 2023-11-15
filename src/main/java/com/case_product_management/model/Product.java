@@ -3,6 +3,7 @@ package com.case_product_management.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -16,11 +17,6 @@ public class Product {
 
     @NotEmpty
     private long price;
-//    private int donViKho;
-//    private int donViBan;
-//    private String thongTinBaoHanh;
-//    private String thongTinChung;
-//    private String thietKe;
 
     @NotEmpty
     private String description;
@@ -33,10 +29,16 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "orderDetail_id")
+    private List<OrderDetails> orderDetail;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ma_hang_sx")
-//    private HangSanXuat hangSanXuat;
+    public List<OrderDetails> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(List<OrderDetails> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
 
     public Product() {
     }
