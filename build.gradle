@@ -29,8 +29,19 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
+
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation "com.querydsl:querydsl-jpa:4.0.0"
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    implementation 'com.cloudinary:cloudinary-http44:1.27.0'
+
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('bootBuildImage') {

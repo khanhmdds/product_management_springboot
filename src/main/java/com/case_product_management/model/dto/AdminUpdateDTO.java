@@ -1,13 +1,14 @@
-package com.codegym.model.dto.staff;
+package com.case_product_management.model.dto;
 
-import com.codegym.model.LocationRegion;
-import com.codegym.model.Staff;
-import com.codegym.model.StaffAvatar;
-import com.codegym.model.User;
+import com.case_product_management.model.LocationRegion;
+import com.case_product_management.model.Admin;
+import com.case_product_management.model.AdminAvatar;
+import com.case_product_management.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -16,12 +17,13 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
+@Accessors(chain = true)
 public class AdminUpdateDTO {
     private Long id;
-    @NotEmpty(message = "Vui lòng nhập họ tên.")
-    @Size(min = 5, max = 100, message = "Họ tên có độ dài nằm trong khoảng 5 - 100 ký tự.")
+    @NotEmpty(message = "Not empty")
+    @Size(min = 5, max = 100, message = "5 - 100 characters")
     private String fullName;
-    @NotEmpty(message = "Vui lòng nhập số điện thoại.")
+    @NotEmpty(message = "Not empty")
     private String phone;
 
     private String roleId;
@@ -34,8 +36,8 @@ public class AdminUpdateDTO {
     private String wardId;
     private String wardName;
 
-    @NotEmpty(message = "Vui lòng nhập địa chỉ")
-    @Size(min = 5, max = 100, message = "Địa chỉ có độ dài nằm trong khoảng 5 - 100 ký tự.")
+    @NotEmpty(message = "Not empty")
+    @Size(min = 5, max = 100, message = "5 - 100 characters")
     private String address;
 
     public LocationRegion toLocationRegion(){
@@ -50,13 +52,13 @@ public class AdminUpdateDTO {
                 .setAddress(address);
     }
 
-    public Staff toStaff(User user, LocationRegion locationRegion, StaffAvatar staffAvatar){
-        return new Staff()
+    public Admin toStaff(User user, LocationRegion locationRegion, AdminAvatar adminAvatar){
+        return new Admin()
                 .setId(id)
                 .setFullName(fullName)
                 .setPhone(phone)
                 .setLocationRegion(locationRegion)
                 .setUser(user)
-                .setAvatar(staffAvatar);
+                .setAdminAvatar(adminAvatar);
     }
 }

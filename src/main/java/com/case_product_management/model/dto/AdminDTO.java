@@ -1,18 +1,18 @@
-package com.case_product_management.model.dto.staff;
+package com.case_product_management.model.dto;
 
-import com.case_product_management.model.LocationRegion;
 import com.case_product_management.model.Admin;
 import com.case_product_management.model.AdminAvatar;
+import com.case_product_management.model.LocationRegion;
 import com.case_product_management.model.User;
 
 import com.case_product_management.model.dto.LocationRegionDTO;
-import com.codegym.model.dto.staffAvatar.StaffAvatarDTO;
 
-import com.codegym.model.dto.user.UserDTO;
+import com.case_product_management.model.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -23,15 +23,16 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StaffDTO {
+@Accessors(chain = true)
+public class AdminDTO {
     private Long id;
 
-    @NotEmpty(message = "Vui lòng nhập tên nhân viên.")
-    @Size(min = 5, max = 100, message = "Họ tên có độ dài nằm trong khoảng 5 - 100 ký tự")
+    @NotEmpty(message = "Not empty")
+    @Size(min = 5, max = 100, message = "5 - 100 characters")
     private String fullName;
 
-    @NotEmpty(message = "Vui lòng nhập số điện thoại.")
-    @Pattern(regexp = "^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$", message = "Số điện thoại không đúng định dạng.")
+    @NotEmpty(message = "Not empty")
+    @Pattern(regexp = "^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$", message = "Invalid phone number")
     private String phone;
 
     @Valid
@@ -41,24 +42,24 @@ public class StaffDTO {
     private UserDTO user;
 
     @Valid
-    private StaffAvatarDTO staffAvatar;
+    private AdminAvatarDTO adminAvatar;
 
-    public StaffDTO(Long id, String fullName, String phone, LocationRegion locationRegion, User user, StaffAvatar staffAvatar) {
+    public AdminDTO(Long id, String fullName, String phone, LocationRegion locationRegion, User user, AdminAvatar adminAvatar) {
         this.id = id;
         this.fullName = fullName;
         this.phone = phone;
         this.locationRegion = locationRegion.toLocationRegionDTO();
         this.user = user.toUserDTO();
-        this.staffAvatar = staffAvatar.toStaffAvatarDTO();
+        this.adminAvatar = adminAvatar.toStaffAvatarDTO();
     }
 
-//    public Staff toStaff() {
-//        return new Staff()
-//                .setId(id)
-//                .setFullName(fullName)
-//                .setPhone(phone)
-//                .setLocationRegion(locationRegion.toLocationRegion())
-//                .setUser(user.toUser())
-//                .setAvatar(staffAvatar.toStaffAvatar());
-//    }
+    public Admin toStaff() {
+        return new Admin()
+                .setId(id)
+                .setFullName(fullName)
+                .setPhone(phone)
+                .setLocationRegion(locationRegion.toLocationRegion())
+                .setUser(user.toUser())
+                .setAdminAvatar(adminAvatar.toStaffAvatar());
+    }
 }

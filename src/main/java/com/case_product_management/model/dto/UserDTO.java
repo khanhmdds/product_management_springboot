@@ -1,11 +1,11 @@
-package com.codegym.model.dto.user;
+package com.case_product_management.model.dto;
 
-import com.codegym.model.User;
-import com.codegym.model.dto.role.RoleDTO;
+import com.case_product_management.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -16,16 +16,17 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
+@Accessors(chain = true)
 public class UserDTO {
     private Long id;
 
-    @NotBlank(message = "Vui lòng nhập email")
-    @Email(message = "Email không đúng định dạng")
-    @Size(min = 5, max = 50, message = "Độ dài email trong khoảng 5-50 ký tự")
+    @NotBlank()
+    @Email()
+    @Size(min = 5, max = 50)
     private String username;
 
-    @NotBlank(message = "Vui lòng nhập mật khẩu")
-    @Size(max = 30, message = "Độ dài mật khẩu tối đa 30 ký tự")
+    @NotBlank()
+    @Size(max = 3)
     private String password;
 
     @Valid

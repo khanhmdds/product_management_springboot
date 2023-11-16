@@ -1,10 +1,11 @@
-package com.codegym.model.dto.staffAvatar;
+package com.case_product_management.model.dto;
 
-import com.codegym.model.StaffAvatar;
+import com.case_product_management.model.AdminAvatar;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -12,18 +13,19 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StaffAvatarDTO {
+@Accessors(chain = true)
+public class AdminAvatarDTO {
     private String id;
     private String fileName;
     private String fileFolder;
-    @NotEmpty(message = "Vui lòng chọn hình ảnh")
+    @NotEmpty(message = "Not Empty")
     private String fileUrl;
     private String fileType;
     private String cloudId;
     private Long ts;
 
-    public StaffAvatar toStaffAvatar() {
-        return new StaffAvatar()
+    public AdminAvatar toStaffAvatar() {
+        return new AdminAvatar()
                 .setId(id)
                 .setFileName(fileName)
                 .setFileFolder(fileFolder)

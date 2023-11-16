@@ -1,139 +1,71 @@
 package com.case_product_management.model;
 
+import com.case_product_management.model.dto.RoleDTO;
+import com.case_product_management.model.dto.UserDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
 
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotEmpty
-    @Email
-    private String email;
+    @Column(unique = true, nullable = false)
+    private String username;
 
-    @NotEmpty
-    @Min(8)
+    @Column(nullable = false)
     private String password;
 
-    @NotEmpty
-    @Transient
-    private String confirmPassword;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    private Role role;
 
-    @NotEmpty
-    private String fullName;
+////        userDTO.setRole(role.toRoleDTO());
+//        return userDTO;
+//    public UserDTO toUserDTO() {
+//        return new UserDTO()
+//                .setId()
+//                .setUsername()
+//                .setPassword(password);
+////                .setRole(role.toRoleDTO());
+//    }
 
-    @NotEmpty
-    @Pattern(regexp = "(\\+84|0)[0-9]{9}")
-    private String number;
+//    public UserDTO toUserDTO(){
+//        UserDTO userDTO = new UserDTO();
+//        userDTO.setId(id);
+//        userDTO.setUsername(username);
+//        userDTO.setPassword(password);
+//        // Chuyển đổi đối tượng Role sang RoleDTO
+//        Role role = this.getRole();
+//        RoleDTO roleDTO = role.toRoleDTO();
+//        // Set đối tượng RoleDTO vào UserDTO
+//        userDTO.setRole(roleDTO);
+//
+//        return userDTO;
+//    }
 
-    @NotEmpty
-    private String address;
-
-    @ManyToMany
-    @JoinTable(name="users_roles",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id"))
-    private Set<Role> role;
-
-    @Transient
-    private List<Order> listOrder;
-
-    public User() {
-    }
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String email, String password, String confirmPassword, String fullName, String number, String address, Set<Role> roles, List<Order> listOrder) {
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.fullName = fullName;
-        this.number = number;
-        this.address = address;
-        this.role = roles;
-        this.listOrder = listOrder;
-    }
-
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<Order> getListOrder() {
-        return listOrder;
-    }
-
-    public void setListOrder(List<Order> listOrder) {
-        this.listOrder = listOrder;
-    }
-
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    //chaining method
+    public UserDTO toUserDTO(){
+        return new UserDTO()
+                .setId(id)
+                .setUsername(username)
+                .setPassword(password)
+                .setRole(role.toRoleDTO());
     }
 }

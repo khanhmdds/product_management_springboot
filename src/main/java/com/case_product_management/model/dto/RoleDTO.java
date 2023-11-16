@@ -1,10 +1,11 @@
-package com.codegym.model.dto.role;
+package com.case_product_management.model.dto;
 
-import com.codegym.model.Role;
+import com.case_product_management.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,8 +13,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Getter
 @Setter
+@Accessors(chain = true)
 public class RoleDTO {
-    @NotNull(message = "Vui lòng chọn role")
+    @NotNull(message = "Not empty")
     private Long id;
 
     private String code;

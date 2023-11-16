@@ -1,10 +1,11 @@
-package com.codegym.model.dto.staff;
+package com.case_product_management.model.dto;
 
 import com.case_product_management.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
@@ -15,18 +16,19 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StaffCreateDTO {
+@Accessors(chain = true)
+public class AdminCreateDTO {
     private Long id;
 
-    @NotEmpty(message = "Vui lòng nhập họ tên.")
-    @Size(min = 5, max = 100, message = "Họ tên có độ dài nằm trong khoảng 5 - 100 ký tự.")
+    @NotEmpty(message = "Not empty")
+    @Size(min = 5, max = 100, message = "5 - 100 characters")
     private String fullName;
 
-    @NotEmpty(message = "Vui lòng nhập số điện thoại.")
+    @NotEmpty(message = "Not empty")
     private String phone;
 
-    @Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Email không đúng định dạng.")
-    @NotEmpty(message = "Vui lòng nhập email.")
+    @Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Email invalid")
+    @NotEmpty(message = "Not empty")
     private String username;
 
     private String password;
@@ -36,24 +38,24 @@ public class StaffCreateDTO {
     MultipartFile file;
 
     private String fileType;
-    @Pattern(regexp = "^\\d+$", message = "ID Tỉnh/Thành phố phải là số.")
-    @NotEmpty(message = "ID Tỉnh/Thành phố xã không được trống.")
+    @Pattern(regexp = "^\\d+$", message = "Invalid")
+    @NotEmpty(message = "Not empty")
     private String provinceId;
-    @NotEmpty(message = "Tên Tỉnh/Thành phố không được trống.")
+    @NotEmpty(message = "Not empty")
     private String provinceName;
-    @Pattern(regexp = "^\\d+$", message = "ID Thành phố/Quận/Huyện phải là số.")
-    @NotEmpty(message = "ID Thành phố/Quận/Huyện xã không được trống.")
+    @Pattern(regexp = "^\\d+$", message = "Invalid")
+    @NotEmpty(message = "Not empty")
     private String districtId;
-    @NotEmpty(message = "Tên Thành phố/Quận/Huyện xã không được trống.")
+    @NotEmpty(message = "Not empty")
     private String districtName;
-    @Pattern(regexp = "^\\d+$", message = "ID Phường/Xã/Thị trấn phải là số.")
-    @NotEmpty(message = "Phường/Xã/Thị trấn không được trống.")
+    @Pattern(regexp = "^\\d+$", message = "Invalid")
+    @NotEmpty(message = "Not empty")
     private String wardId;
-    @NotEmpty(message = "Tên Phường/Xã/Thị trấn không được trống.")
+    @NotEmpty(message = "Not empty")
     private String wardName;
 
-    @NotEmpty(message = "Vui lòng nhập địa chỉ")
-    @Size(min = 5, max = 100, message = "Địa chỉ có độ dài nằm trong khoảng 5 - 100 ký tự.")
+    @NotEmpty(message = "Not empty")
+    @Size(min = 5, max = 100, message = "5 - 100 characters")
     private String address;
 
     public User toUser(Role role){
@@ -83,6 +85,6 @@ public class StaffCreateDTO {
                 .setPhone(phone)
                 .setLocationRegion(locationRegion)
                 .setUser(user)
-                .setAvatar(adminAvatar);
+                .setAdminAvatar(adminAvatar);
     }
 }

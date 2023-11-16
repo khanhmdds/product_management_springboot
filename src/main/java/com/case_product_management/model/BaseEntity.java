@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.case_product_management.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
