@@ -48,7 +48,6 @@ public class ProductController {
     public ModelAndView listProducts(){
         ModelAndView modelAndView = new ModelAndView("/product/list");
         modelAndView.addObject("products", iProductService.findAll());
-        modelAndView.addObject("categories", iCategoryService.findAll());
         return modelAndView;
     }
 
@@ -81,13 +80,18 @@ public class ProductController {
             modelAndView.addObject("product", product.get());
             return modelAndView;
         }else {
-            return new ModelAndView("/error");
+            return new ModelAndView("error");
         }
     }
 
-    @PostMapping("delete")
+    @PostMapping("/delete")
     public String deleteProduct(@ModelAttribute("product") Product product){
-        iProductService.remove(product.getProduct_id());
+        Long productId = product.getProduct_id();
+//        if(productId == null || productId <= 0){
+//            System.out.println("Id k hop le");
+//            return "redirect:/products";
+//        }
+        iProductService.remove(productId);
         return "redirect:/products";
     }
 }

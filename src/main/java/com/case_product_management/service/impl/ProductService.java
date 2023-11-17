@@ -7,6 +7,7 @@ import com.case_product_management.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,15 @@ public class ProductService implements IProductService {
     @Override
     public Iterable<Product> findAllByCategory(Category category){
         return iProductRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public List<Product> searchProducts(String keyword){
+        return iProductRepository.findByProductNameContaining(keyword);
+    }
+
+    @Override
+    public Iterable<Product> findProductsByCategory(Category category){
+        return iProductRepository.findProductsByCategory(category);
     }
 }

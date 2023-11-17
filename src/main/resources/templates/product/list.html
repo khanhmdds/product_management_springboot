@@ -30,12 +30,13 @@
             <td th:text="${product.description}"></td>
             <td th:text="${product.getCategory().getName()}"></td>
             <td><a type="button" class="btn btn-warning" th:href="@{/products/update/__${product.product_id}__ }">Update</a></td>
-            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a></td>
+            <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" th:href="@{/products/delete/__${product.product_id}__ }">Delete</a></td>
         </tr>
     </th:block>
 </table>
 
-<!-- Modal -->
+
+ Modal
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -48,7 +49,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <form th:action="@{/products/delete}" th:object="${product}" method="post">
+                    <input type="hidden" name="productId" id="productId"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+<!--                    <input type="hidden" name="id" th:field="*{product_id}">-->
+<!--                    <button type="submit" class="btn btn-danger">Delete</button>-->
+                </form>
+<!--                <a type="button" class="btn btn-danger" th:href="@{'/products/delete/' + ${product.product_id}}">Delete</a>-->
             </div>
         </div>
     </div>
