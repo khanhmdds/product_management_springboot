@@ -5,7 +5,7 @@
     <title>Index</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -56,17 +56,18 @@
 <!-- products -->
 <div class="product-section mt-150 mb-150">
     <div class="container">
-
         <div class="row">
             <div class="col-md-12">
-                <div class="product-filters">
-                    <ul>
-                        <li class="active" data-filter="*">All</li>
-                        <li data-filter=".strawberry">Strawberry</li>
-                        <li data-filter=".berry">Berry</li>
-                        <li data-filter=".lemon">Lemon</li>
-                    </ul>
-                </div>
+                <form th:action="@{/clients/searchByCategory}" method="get">
+                    <div class="product-filters">
+                        <ul>
+                            <li class="active"><button type="button" onclick="window.location.href='/clients'">All</button></li>
+                            <th:block th:each="category : ${categories}">
+                                <li><button th:type="submit" name="category" th:value="${category.category_id}" th:text="${category.name}"></button></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -80,7 +81,7 @@
                         <h3 th:text="${product.productName}"></h3>
                         <span th:text="${product.getCategory().getName()}"></span>
                         <p class="product-price" th:text="${product.price}"></p>
-                        <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a th:href="@{/shopping-cart/add/__${product.product_id}__ }" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
             </th:block>

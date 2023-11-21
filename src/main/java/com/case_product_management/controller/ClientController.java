@@ -55,9 +55,20 @@ public class ClientController {
         return modelAndView;
     }
 
-//    @GetMapping("/searchByCategory")
-//    public ModelAndView searchByCategory(@RequestParam("keyword") Long id){
-//        Optional<Category> category = iCategoryService.findById(id);
-//        Iterable<Product> products = iProductService.findProductsByCategory(category);
-//    }
+    @GetMapping("/searchByCategory")
+    public ModelAndView searchByCategory(@RequestParam("category") Long id){
+        Optional<Category> optionalCategory = iCategoryService.findById(id);
+        if(optionalCategory.isPresent()){
+            Category category = optionalCategory.get();
+            List<Product> products = iProductService.findProductsByCategory(category);
+//            List<Product> allProducts = (List<Product>) iProductService.findAll();
+            Iterable<Product> allProducts = iProductService.findAll();
+            ModelAndView modelAndView = new ModelAndView("/client/index");
+            modelAndView.addObject("products", products);
+            modelAndView.addObject("all", allProducts);
+            return modelAndView;
+        }else {
+            return new ModelAndView("/client/error");
+        }
+    }
 }

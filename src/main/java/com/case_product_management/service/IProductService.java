@@ -13,5 +13,5 @@ public interface IProductService {
     void remove(Long id);
     List<Product> searchProducts(String keyword);
     Iterable<Product> findAllByCategory(Category category);
-    Iterable<Product> findProductsByCategory(Category category);
+    List<Product> findProductsByCategory(Category category);
 }

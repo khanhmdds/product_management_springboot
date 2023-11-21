@@ -46,7 +46,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Iterable<Product> findProductsByCategory(Category category){
+    public List<Product> findProductsByCategory(Category category){
         return iProductRepository.findProductsByCategory(category);
     }
 }
