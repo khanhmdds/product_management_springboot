@@ -3,18 +3,19 @@ package com.case_product_management.model;
 public class CartItem {
     private Long productId;
     private String name;
-    private double price;
+    private Long price;
     private int qty = 1;
     private String image;
-
+    private Product product;
     public CartItem() {
     }
-    public CartItem(Long productId, String name, double price, int qty, String image){
+    public CartItem(Long productId, String name, Long price, int qty, String image, Product product){
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.qty = qty;
         this.image = image;
+        this.product = product;
     }
 
     public Long getProductId() {
@@ -33,11 +34,11 @@ public class CartItem {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -55,5 +56,17 @@ public class CartItem {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Long getProductPrice() {
+        return product != null ? product.getPrice() : (long) 0;
     }
 }

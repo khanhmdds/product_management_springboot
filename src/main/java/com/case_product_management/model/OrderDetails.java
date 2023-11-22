@@ -1,6 +1,7 @@
 package com.case_product_management.model;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "orderDetails")
