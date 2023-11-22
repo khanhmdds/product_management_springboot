@@ -2,6 +2,7 @@ package com.case_product_management.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Product {
     @NotEmpty
     private String productName;
 
-    @NotEmpty
+    @Min(1)
     private long price;
 
     @NotEmpty
@@ -43,7 +44,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(long product_id, String productName, long price, String description, String image, Category category) {
+    public Product(long product_id, @NotEmpty String productName, @Min(1) long price, @NotEmpty String description, @NotEmpty String image, Category category) {
         this.product_id = product_id;
         this.productName = productName;
         this.price = price;

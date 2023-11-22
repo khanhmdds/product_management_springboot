@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
@@ -114,6 +115,12 @@ public class ShoppingCartController {
         iShoppingCartService.clear();
         model.addAttribute("order", order);
 
-        return "redirect:/shopping-cart/view-cart";
+        return "redirect:/shopping-cart/success";
+    }
+
+    @GetMapping("/success")
+    public ModelAndView success(){
+        ModelAndView modelAndView = new ModelAndView("/client/success");
+        return modelAndView;
     }
 }

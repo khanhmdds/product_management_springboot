@@ -8,9 +8,12 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -34,9 +37,10 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ModelAndView saveProduct(@ModelAttribute("product") Product product){
-//        Optional<Category> optionalCategory = iCategoryService.findById(categoryId);
-//        product.setCategory(optionalCategory.get());
+    public ModelAndView saveProduct(@Validated @ModelAttribute("product") Product product, BindingResult bindingResult){
+        if(bindingResult.hasFieldErrors()){
+            return new ModelAndView("/product/create");
+        }
         iProductService.save(product);
         ModelAndView modelAndView = new ModelAndView("/product/create");
         modelAndView.addObject("product", new Product());
@@ -76,7 +80,7 @@ public class ProductController {
     public ModelAndView showDeleteForm(@PathVariable Long id){
         Optional<Product> product = iProductService.findById(id);
         if(product.isPresent()){
-            ModelAndView modelAndView = new ModelAndView("/product/list");
+            ModelAndView modelAndView = new ModelAndView("/product/delete");
             modelAndView.addObject("product", product.get());
             return modelAndView;
         }else {
@@ -86,12 +90,7 @@ public class ProductController {
 
     @PostMapping("/delete")
     public String deleteProduct(@ModelAttribute("product") Product product){
-        Long productId = product.getProduct_id();
-//        if(productId == null || productId <= 0){
-//            System.out.println("Id k hop le");
-//            return "redirect:/products";
-//        }
-        iProductService.remove(productId);
+        iProductService.remove(product.getProduct_id());
         return "redirect:/products";
     }
 }

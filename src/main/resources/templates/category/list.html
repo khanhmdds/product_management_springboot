@@ -3,23 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<a href="/categories/create">Create new category</a>
+
+<div th:replace="layout/nav :: nav"></div>
+<br>
+
 <h1>Categories</h1>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-    </tr>
-    <th:block th:each="category : ${categories}">
-        <tr>
-            <td th:text="${category.category_id}"></td>
-            <td th:text="${category.name}"></td>
-            <td><a th:href="@{/categories/update/__${category.category_id}__ }">Update</a></td>
-            <td><a th:href="@{/categories/delete/__${category.category_id}__ }">Delete</a></td>
-        </tr>
-    </th:block>
-</table>
+
+<a type="button" class="btn btn-primary" href="/categories/create">Create new category</a>
+<!--<table border="1">-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Name</th>-->
+<!--    </tr>-->
+<!--    <th:block th:each="category : ${categories}">-->
+<!--        <tr>-->
+<!--            <td th:text="${category.category_id}"></td>-->
+<!--            <td th:text="${category.name}"></td>-->
+<!--            <td><a th:href="@{/categories/update/__${category.category_id}__ }">Update</a></td>-->
+<!--            <td><a th:href="@{/categories/delete/__${category.category_id}__ }">Delete</a></td>-->
+<!--        </tr>-->
+<!--    </th:block>-->
+<!--</table>-->
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <th:block th:each="category : ${categories}">
+                    <tr>
+                        <td th:text="${category.category_id}"></td>
+                        <td th:text="${category.name}"></td>
+                        <td><a type="button" class="btn btn-warning" th:href="@{/categories/update/__${category.category_id}__ }">Update</a></td>
+                        <td><a type="button" class="btn btn-danger" th:href="@{/categories/delete/__${category.category_id}__ }">Delete</a></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

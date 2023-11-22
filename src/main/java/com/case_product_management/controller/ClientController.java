@@ -71,4 +71,11 @@ public class ClientController {
             return new ModelAndView("/client/error");
         }
     }
+
+    @GetMapping("/error")
+    public ModelAndView error(){
+        ModelAndView modelAndView = new ModelAndView("/client/error");
+        modelAndView.addObject("message", "Not Found");
+        return modelAndView;
+    }
 }
