@@ -10,7 +10,7 @@
     <title>Detail</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -73,13 +73,9 @@
             <div class="col-md-7">
                 <div class="single-product-content">
                     <h3 th:text="${product.productName}"></h3>
-<!--                    <span th:text="${product.getCategory().getName()}"></span>-->
                     <p class="single-product-pricing" th:text="${product.price}"></p>
                     <p th:text="${product.description}"></p>
                     <div class="single-product-form">
-<!--                        <form action="index.html">-->
-<!--                            <input type="number" placeholder="0">-->
-<!--                        </form>-->
                         <a th:href="@{/shopping-cart/add/__${product.product_id}__ }" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         <p>Categories: <strong th:text="${product.getCategory().getName()}"></strong></p>
                     </div>
