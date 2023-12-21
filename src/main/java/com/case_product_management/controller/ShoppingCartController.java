@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/shopping-cart")
 public class ShoppingCartController {
     @Autowired
@@ -46,7 +47,7 @@ public class ShoppingCartController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            List<CartItem> cartItems = (List<CartItem>) iShoppingCartService.getAllItems();
+            List<CartItem> cartItems = new ArrayList<>(iShoppingCartService.getAllItems());
             double total = iShoppingCartService.getTotal();
 
             response.put("cartItems", cartItems);
@@ -209,7 +210,7 @@ public class ShoppingCartController {
 //    }
 
     @PostMapping("/place-order")
-    public ResponseEntity<OrderResponse> placeOrder(@ModelAttribute OrderForm orderForm) {
+    public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderForm orderForm) {
         Collection<CartItem> cartItems = iShoppingCartService.getAllItems();
         Order order = new Order();
         order.setAddress(orderForm.getAddress());

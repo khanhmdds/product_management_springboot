@@ -91,9 +91,15 @@ public class ClientController {
 //        }
 //    }
 
+    @GetMapping("/getCategory")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = (List<Category>) iCategoryService.findAll();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
     @GetMapping("/searchByCategory")
-    public ResponseEntity<List<Product>> searchByCategory(@RequestParam("category") Long id) {
-        Optional<Category> optionalCategory = iCategoryService.findById(id);
+    public ResponseEntity<List<Product>> searchByCategory(@RequestParam("categoryId") Long categoryId) {
+        Optional<Category> optionalCategory = iCategoryService.findById(categoryId);
         if (optionalCategory.isPresent()) {
             Category category = optionalCategory.get();
             List<Product> products = iProductService.findProductsByCategory(category);
