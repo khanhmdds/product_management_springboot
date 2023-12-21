@@ -111,7 +111,7 @@
 	<!-- end header -->
 
 	<!-- search area -->
-	<div class="search-area">
+	<div class="search-area" id="searchForm">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -120,7 +120,7 @@
 						<div class="search-bar-tablecell">
 							<h3>Search For:</h3>
 							<input id="searchKeyword" type="text" placeholder="Keywords">
-							<button type="submit" onclick="searchProducts()">Search <i class="fas fa-search"></i></button>
+							<button id="searchButton" type="submit" onclick="searchProducts()">Search <i class="fas fa-search"></i></button>
 						</div>
 					</div>
 				</div>
@@ -151,11 +151,11 @@
 			<div class="row">
                 <div class="col-md-12">
                     <div class="product-filters">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".strawberry">Strawberry</li>
-                            <li data-filter=".berry">Berry</li>
-                            <li data-filter=".lemon">Lemon</li>
+                        <ul id="categoryList">
+<!--                            <li class="active" data-filter="*" data-category-id="0">All</li>-->
+<!--                            <li data-category-id="1">Com</li>-->
+<!--                            <li data-category-id="2">Pho</li>-->
+<!--                            <li data-category-id="3">Bo</li>-->
                         </ul>
                     </div>
                 </div>
@@ -311,6 +311,13 @@
 <!--				}-->
 <!--			})-->
 <!--		})-->
+<!--	</script>-->
+
+<!--	<script>-->
+<!--		$(document).on('click', '#categoryList li', function() {-->
+<!--			var categoryId = $(this).data('category-id');-->
+<!--			filterProductsByCategory(categoryId);-->
+<!--		});-->
 <!--	</script>-->
 
 	<script type="text/javascript" src="shop.js"></script>
